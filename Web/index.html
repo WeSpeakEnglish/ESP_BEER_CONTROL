@@ -1,0 +1,164 @@
+<html>
+	<head>
+		<title>Brew Control
+		</title>
+	<style>	
+.button {
+  background-color: #4CAF50;
+  border: none;
+  width: 200;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: green;
+}
+	
+	.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+ 
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+table, th, td {
+  border: 1px solid black;
+}
+.center {
+  text-align: center;
+  border: 3px solid green;
+}
+	</style>
+	<script>
+	function dispSliderValue(p1, p2, p3) {
+     	var slider = document.getElementById(p1); // "pump1"
+		var output = document.getElementById(p2); //"demo"
+		output.innerHTML = slider.value +" " +p3; //"minutes"
+
+		slider.oninput = function() {
+		output.innerHTML = this.value +" "+ p3;
+		}
+    }
+	function updateFrame(){
+	///test/demo_form.php?name1=value1&name2=value2
+	var URL_set = 'http://test.pollutants.eu/setup.php?' +'p0=' + document.getElementById("pump1").value; 
+	document.getElementById('iframe_id').src = URL_set ;
+	}
+	</script>
+	
+	</head>
+	<body>
+
+	<table cellpadding="10" cellspacing="10">
+		<tr>	
+		<td rowspan = 4>
+				<img src = "picture.png" ><br><br>
+				<div class = "center" style= "border:0px"><button type = "submit" class="button" onclick="javasript:updateFrame();">Store Setup</button></div>
+				<div class = "center" style= "border:0px"><iframe src="/default.asp" id = 'iframe_id' width="200" height="30" align="center" frameBorder="0" scrolling="no"></iframe><div>
+			</td>
+			<td>
+			<b>SET COLD PUMP RUN TIME:</b>
+			<br>
+			
+		<div class="slidecontainer">
+		<input type="range" min="1" max="100" value="5" class="slider" id="pump1">
+		</div>
+        <div id="demoPump1" class="center"></div>
+		 <script>
+			dispSliderValue("pump1","demoPump1","minutes");
+         </script>
+			</td>
+
+		</tr>
+		<tr>
+			<td>
+			<b>SET HOT TANK HEATING TIME:</b>
+			<br>
+		<div class="slidecontainer">
+		<input type="range" min="1" max="255" value="50" class="slider" id="heat1">
+		</div>
+		 <div id="demoHeat1" class="center"></div>
+		<b>SET HOT TANK TEMPERATURE:</b>
+		<br>
+		<input type="range" min="25" max="99" value="50" class="slider" id="temp1">
+		</div>
+		 <div id="demoTemp1" class="center"></div>
+		 <script>
+			dispSliderValue("heat1","demoHeat1","minutes");
+			dispSliderValue("temp1","demoTemp1","&deg;C");
+         </script>
+			</td>
+		</tr>
+		<tr>
+			<td>
+
+		<b>SET HOT PUMP RUN TIME:</b>
+			<br>
+		<div class="slidecontainer">
+        <input type="range" min="1" max="100" value="5" class="slider" id="pump2">
+        </div>
+
+        <div id="demoPump2" class="center"></div>
+		 <script>
+			dispSliderValue("pump2","demoPump2","minutes");
+         </script>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<b>SET COLD TANK COOLING TIME:</b>
+			<br>
+		<div class="slidecontainer">
+		<input type="range" min="1" max="255" value="50" class="slider" id="heat2">
+		</div>
+		 <div id="demoHeat2" class="center"></div>
+		<b>SET COLD TANK TEMPERATURE:</b>
+		<br>
+		<input type="range" min="1" max="25" value="10" class="slider" id="temp2">
+		</div>
+		 <div id="demoTemp2" class="center"></div>
+		 <script>
+			dispSliderValue("heat2","demoHeat2","minutes");
+			dispSliderValue("temp2","demoTemp2","&deg;C");
+         </script>
+		 
+			</td>
+		</tr>
+	</table>
+	
+	</body>
+</html>
